@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Gummadi vaari pelli ahvanam</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Noto+Sans+Telugu:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Alex+Brush&family=Pinyon+Script&family=Noto+Sans+Telugu:wght@400;600;700&family=NTR:ital@0;1&display=swap" rel="stylesheet">
 <style>
   :root {
     --maroon-dark: #3a0d1e;
@@ -45,25 +45,102 @@
 
   .interior {
     position: absolute;
-    inset: 0;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50%;
+    height: 100%;
     display: flex;
+    align-items: center;
+    justify-content: center;
     border-radius: 18px;
     overflow: hidden;
     border: 3px solid var(--gold);
     background: var(--cream);
   }
 
-  .section {
-    flex: 1 1 0;
+  .section-ceremony {
+    width: 100%;
     height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 12px 8px;
+    text-align: center;
   }
 
-  .section + .section {
-    border-left: 1px dashed rgba(58, 13, 30, 0.25);
+  .role-label {
+    font-size: clamp(0.6rem, 1.4vw, 0.75rem);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin: 0;
   }
 
-  .section:nth-child(2) {
-    background: rgba(217, 180, 92, 0.08);
+  .role-name {
+    font-weight: 700;
+    color: var(--maroon);
+    font-size: clamp(0.85rem, 2.3vw, 1.2rem);
+    line-height: 1.3;
+    margin: 0;
+  }
+
+  .role-parents {
+    font-size: clamp(0.62rem, 1.5vw, 0.8rem);
+    color: var(--maroon-dark);
+    line-height: 1.45;
+    margin: 0;
+  }
+
+  .ceremony-invocation {
+    font-size: clamp(0.6rem, 1.4vw, 0.75rem);
+    letter-spacing: 0.06em;
+    color: var(--maroon);
+    margin: 0 0 4px;
+  }
+
+  .ceremony-date,
+  .ceremony-time {
+    font-weight: 600;
+    font-size: clamp(0.68rem, 1.7vw, 0.85rem);
+    color: var(--maroon-dark);
+    margin: 0;
+  }
+
+  .ceremony-venue {
+    font-size: clamp(0.6rem, 1.4vw, 0.78rem);
+    color: var(--maroon-dark);
+    line-height: 1.4;
+    margin: 4px 0 0;
+  }
+
+  .lang-english .role-name {
+    font-family: 'Pinyon Script', cursive;
+    font-size: clamp(1.3rem, 3.4vw, 1.9rem);
+  }
+  .lang-english .knob-label {
+    font-family: 'Alex Brush', cursive;
+    font-size: clamp(1rem, 2.8vw, 1.4rem);
+  }
+  .lang-english .role-label,
+  .lang-english .role-parents,
+  .lang-english .ceremony-invocation,
+  .lang-english .ceremony-date,
+  .lang-english .ceremony-time,
+  .lang-english .ceremony-venue { font-family: 'Cormorant Garamond', serif; }
+
+  .lang-telugu .role-label,
+  .lang-telugu .role-name,
+  .lang-telugu .role-parents,
+  .lang-telugu .ceremony-invocation,
+  .lang-telugu .ceremony-date,
+  .lang-telugu .ceremony-time,
+  .lang-telugu .ceremony-venue,
+  .lang-telugu .knob-label {
+    font-family: 'NTR', serif;
+    font-style: italic;
   }
 
   .door {
@@ -87,8 +164,7 @@
     backface-visibility: hidden;
   }
 
-  .door-left .door-face { border-radius: 18px 0 0 18px; }
-  .door-right .door-face { border-radius: 0 18px 18px 0; }
+  .door-face { border-radius: 18px; }
 
   .door-face-back {
     transform: rotateY(180deg);
@@ -110,20 +186,21 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    gap: 22px;
+    justify-content: space-between;
     padding: 24px;
     text-align: center;
   }
 
-  .telugu-title {
-    font-family: 'Noto Sans Telugu', serif;
+  .door-title {
     font-weight: 700;
-    font-size: clamp(1.1rem, 3vw, 1.7rem);
+    font-size: clamp(1.25rem, 3.4vw, 1.9rem);
     color: var(--gold-light);
-    margin: 0;
+    margin: 14px 0 0;
     line-height: 1.5;
   }
+
+  .lang-telugu .door-title { font-family: 'NTR', serif; font-style: italic; }
+  .lang-english .door-title { font-family: 'Alex Brush', serif; }
 
   .to-line {
     font-size: clamp(1rem, 2.4vw, 1.25rem);
@@ -132,35 +209,60 @@
   }
 
   .guest-name {
-    font-weight: 600;
+    position: relative;
+    top: -6px;
+    font-family: 'Alex Brush', cursive;
+    font-size: clamp(1.3rem, 3vw, 1.8rem);
     color: var(--gold-light);
     border-bottom: 1px solid var(--gold-light);
     padding: 0 6px 2px;
   }
 
-  .card.open .door-left { transform: rotateY(-112deg); }
-  .card.open .door-right { transform: rotateY(112deg); }
+  .card.open .door-left { transform: translateX(50%) rotateY(-112deg); }
+  .card.open .door-right { transform: translateX(-50%) rotateY(112deg); }
 
   .knob {
-    width: 64px;
-    height: 64px;
-    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-width: 150px;
+    max-width: 80%;
+    padding: 10px 20px;
+    border-radius: 999px;
     border: 3px solid var(--maroon-dark);
     background: radial-gradient(circle at 35% 30%, var(--gold-light), var(--gold) 70%);
     box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5);
-    font-size: 1.5rem;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    z-index: 20;
     animation: pulse 2.2s ease-in-out infinite;
-    transition: filter 0.2s ease;
+    transition: top 1.1s cubic-bezier(0.68, -0.2, 0.27, 1.1),
+                transform 1.1s cubic-bezier(0.68, -0.2, 0.27, 1.1),
+                filter 0.2s ease;
+  }
+
+  .knob-label {
+    margin: 0;
+    font-weight: 700;
+    color: var(--maroon-dark);
+    font-size: clamp(0.72rem, 2vw, 0.95rem);
+    line-height: 1.3;
+    text-align: center;
   }
 
   .knob:hover { filter: brightness(1.08); }
 
   .knob.active {
     animation: none;
+  }
+
+  .card.open .knob {
+    top: 100%;
+    margin-top: 18px;
+    transform: translate(-50%, 0);
   }
 
   @keyframes pulse {
@@ -179,10 +281,8 @@
 <body>
   <div class="stage">
     <div class="card" id="card">
-      <div class="interior">
-        <div class="section"></div>
-        <div class="section"></div>
-        <div class="section"></div>
+      <div class="interior" id="interior">
+        <div class="section-ceremony" data-role="ceremony"></div>
       </div>
 
       <div class="door door-left">
@@ -193,21 +293,26 @@
       </div>
       <div class="door door-right">
         <div class="door-face door-face-front">
-          <p class="telugu-title">గుమ్మడి వారి పెళ్ళి ఆహ్వానం</p>
+          <p class="door-title" id="doorTitle"></p>
           <p class="to-line">To respected: <span id="guestName" class="guest-name">___________</span></p>
         </div>
         <div class="door-face door-face-back"></div>
       </div>
+
+      <button class="knob" id="openBtn" aria-label="Open the invitation">
+        <span class="knob-label" id="knobLabel"></span>
+      </button>
     </div>
 
-    <button class="knob" id="openBtn" aria-label="Open the invitation"></button>
-
-    <p class="hint">Tap the gold circle to open or close</p>
+    <p class="hint">Tap the nameplate to open or close</p>
   </div>
 
 <script>
   const card = document.getElementById('card');
+  const interior = document.getElementById('interior');
   const openBtn = document.getElementById('openBtn');
+  const knobLabel = document.getElementById('knobLabel');
+  const doorTitle = document.getElementById('doorTitle');
   const guestName = document.getElementById('guestName');
 
   openBtn.addEventListener('click', () => {
@@ -220,7 +325,59 @@
     if (requestedName) guestName.textContent = requestedName.trim();
   }
 
+  const CONTENT = {
+    english: {
+      title: "Gummadi's Wedding Invitation",
+      groom: { label: 'Groom', name: 'Sai Dheeraj', short: 'Sai Dheeraj', parents: 'Son of Gummadi Venkata Sudhakar & Gummadi Padmaja' },
+      bride: { label: 'Bride', name: 'Lasya Harini', short: 'Lasya Harini', parents: 'Daughter of Gogineni Ramesh & Gogineni Hemalatha' },
+      invocation: 'We joyfully invite you to celebrate the wedding of',
+      date: 'Saturday, 24th January 2026',
+      time: 'Muhurtham: 10:30 – 11:00 AM',
+      venue: 'Sri Vasavi Kalyana Mandapam, Vijayawada, Andhra Pradesh'
+    },
+    telugu: {
+      title: 'గుమ్మడి వారి పెళ్ళి ఆహ్వానం',
+      groom: { label: 'వరుడు', name: 'చి. సాయి ధీరజ్', short: 'సాయి ధీరజ్', parents: 'గుమ్మడి వెంకట సుధాకర్ - గుమ్మడి పద్మజ దంపతుల కుమారుడు' },
+      bride: { label: 'వధువు', name: 'చి.లా.సౌ. లాస్య హరిణి', short: 'లాస్య హరిణి', parents: 'గోగినేని రమేష్ - గోగినేని హేమలత దంపతుల కుమార్తె' },
+      invocation: 'శ్రీరస్తు శుభమస్తు అవిఘ్నమస్తు',
+      date: '24-01-2026, శనివారము',
+      time: 'ముహూర్తం: ఉ. 10:30 - 11:00 గం.',
+      venue: 'శ్రీ వాసవి కళ్యాణ మందిరం, విజయవాడ, ఆంధ్రప్రదేశ్'
+    }
+  };
+
+  function buildRoleSection(person) {
+    return `<p class="role-label">${person.label}</p>` +
+      `<p class="role-name">${person.name}</p>` +
+      `<p class="role-parents">${person.parents}</p>`;
+  }
+
+  function buildCeremonySection(content) {
+    return `<p class="ceremony-invocation">${content.invocation}</p>` +
+      buildRoleSection(content.groom) +
+      buildRoleSection(content.bride) +
+      `<p class="ceremony-date">${content.date}</p>` +
+      `<p class="ceremony-time">${content.time}</p>` +
+      `<p class="ceremony-venue">${content.venue}</p>`;
+  }
+
+  function buildKnobLabel(content) {
+    return `${content.groom.short} weds ${content.bride.short}`;
+  }
+
+  function applyLanguageContent() {
+    const requestedLang = new URLSearchParams(window.location.search).get('lang');
+    const lang = requestedLang && requestedLang.toLowerCase() === 'telugu' ? 'telugu' : 'english';
+    const content = CONTENT[lang];
+
+    card.classList.add(`lang-${lang}`);
+    doorTitle.textContent = content.title;
+    interior.querySelector('.section-ceremony').innerHTML = buildCeremonySection(content);
+    knobLabel.textContent = buildKnobLabel(content);
+  }
+
   applyGuestNameFromUrl();
+  applyLanguageContent();
 </script>
 </body>
 </html>
