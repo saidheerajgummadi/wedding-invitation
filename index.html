@@ -17,9 +17,13 @@
 
   * { box-sizing: border-box; }
 
+  html { overflow-x: hidden; }
+
   body {
     margin: 0;
     min-height: 100vh;
+    min-height: 100dvh;
+    overflow-x: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -33,6 +37,7 @@
     flex-direction: column;
     align-items: center;
     gap: 18px;
+    max-width: 100%;
   }
 
   .card {
@@ -40,6 +45,7 @@
     width: min(90vw, 640px);
     height: min(65vw, 460px);
     perspective: 1800px;
+    -webkit-perspective: 1800px;
     filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.55));
   }
 
@@ -148,6 +154,7 @@
     top: 0;
     height: 100%;
     width: 50%;
+    -webkit-transform-style: preserve-3d;
     transform-style: preserve-3d;
     transition: transform 1.1s cubic-bezier(0.68, -0.2, 0.27, 1.1);
     z-index: 10;
@@ -160,11 +167,11 @@
     position: absolute;
     inset: 0;
     border: 3px solid var(--gold);
+    border-radius: 18px;
     overflow: hidden;
+    -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
   }
-
-  .door-face { border-radius: 18px; }
 
   .door-face-back {
     transform: rotateY(180deg);
@@ -233,6 +240,9 @@
     border: 3px solid var(--maroon-dark);
     background: radial-gradient(circle at 35% 30%, var(--gold-light), var(--gold) 70%);
     box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5);
+    -webkit-appearance: none;
+    appearance: none;
+    -webkit-tap-highlight-color: transparent;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -275,6 +285,16 @@
     font-size: 0.95rem;
     letter-spacing: 0.04em;
     margin: 0;
+  }
+
+  @media (max-width: 480px) {
+    .card {
+      height: min(120vw, 560px);
+    }
+    .section-ceremony {
+      gap: 4px;
+      padding: 8px 6px;
+    }
   }
 </style>
 </head>
