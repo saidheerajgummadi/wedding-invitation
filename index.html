@@ -62,86 +62,106 @@
     border-radius: 18px;
     overflow: hidden;
     border: 3px solid var(--gold);
-    background: var(--cream);
+    background-image: url('Gemini_Generated_Image_3ywxc3ywxc3ywxc3.png');
+    background-size: cover;
+    background-position: center;
   }
 
   .section-ceremony {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 14px;
+  }
+
+  .ceremony-text {
+    position: relative;
     width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 6px;
-    padding: 12px 8px;
+    gap: 5px;
+    padding: 26% 18% 22%;
     text-align: center;
   }
 
-  .role-label {
-    font-size: clamp(0.6rem, 1.4vw, 0.75rem);
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
+  .invite-line {
+    font-size: clamp(0.62rem, 1.5vw, 0.8rem);
+    color: var(--maroon-dark);
+    margin: 0;
+  }
+
+  .couple-name {
+    font-weight: 700;
+    color: var(--maroon);
+    font-size: clamp(1.05rem, 2.8vw, 1.5rem);
+    line-height: 1.2;
+    margin: 2px 0 0;
+  }
+
+  .amp-divider {
+    font-size: clamp(0.85rem, 2vw, 1.1rem);
     color: var(--gold);
     margin: 0;
   }
 
-  .role-name {
-    font-weight: 700;
-    color: var(--maroon);
-    font-size: clamp(0.85rem, 2.3vw, 1.2rem);
-    line-height: 1.3;
+  .role-parents {
+    font-size: clamp(0.56rem, 1.3vw, 0.72rem);
+    color: var(--maroon-dark);
+    line-height: 1.4;
     margin: 0;
   }
 
-  .role-parents {
+  .date-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 80%;
+    padding: 4px 0;
+    margin: 4px 0 0;
+    border-top: 1px solid var(--maroon);
+    border-bottom: 1px solid var(--maroon);
+    font-weight: 600;
     font-size: clamp(0.62rem, 1.5vw, 0.8rem);
     color: var(--maroon-dark);
-    line-height: 1.45;
-    margin: 0;
   }
 
-  .ceremony-invocation {
-    font-size: clamp(0.6rem, 1.4vw, 0.75rem);
-    letter-spacing: 0.06em;
-    color: var(--maroon);
-    margin: 0 0 4px;
-  }
+  .date-box .sep { color: var(--gold); }
 
-  .ceremony-date,
   .ceremony-time {
     font-weight: 600;
-    font-size: clamp(0.68rem, 1.7vw, 0.85rem);
+    font-size: clamp(0.6rem, 1.4vw, 0.76rem);
     color: var(--maroon-dark);
     margin: 0;
   }
 
   .ceremony-venue {
-    font-size: clamp(0.6rem, 1.4vw, 0.78rem);
+    font-size: clamp(0.58rem, 1.3vw, 0.74rem);
     color: var(--maroon-dark);
-    line-height: 1.4;
-    margin: 4px 0 0;
+    line-height: 1.35;
+    margin: 0;
   }
 
-  .lang-english .role-name {
-    font-family: 'Pinyon Script', cursive;
-    font-size: clamp(1.3rem, 3.4vw, 1.9rem);
-  }
+  .lang-english .couple-name { font-family: 'Pinyon Script', cursive; }
   .lang-english .knob-label {
     font-family: 'Alex Brush', cursive;
     font-size: clamp(1rem, 2.8vw, 1.4rem);
   }
-  .lang-english .role-label,
+  .lang-english .invite-line,
+  .lang-english .amp-divider,
   .lang-english .role-parents,
-  .lang-english .ceremony-invocation,
-  .lang-english .ceremony-date,
+  .lang-english .date-box,
   .lang-english .ceremony-time,
   .lang-english .ceremony-venue { font-family: 'Cormorant Garamond', serif; }
 
-  .lang-telugu .role-label,
-  .lang-telugu .role-name,
+  .lang-telugu .invite-line,
+  .lang-telugu .couple-name,
+  .lang-telugu .amp-divider,
   .lang-telugu .role-parents,
-  .lang-telugu .ceremony-invocation,
-  .lang-telugu .ceremony-date,
+  .lang-telugu .date-box,
   .lang-telugu .ceremony-time,
   .lang-telugu .ceremony-venue,
   .lang-telugu .knob-label {
@@ -179,17 +199,31 @@
     box-shadow: inset 0 0 0 6px rgba(217, 180, 92, 0.18);
   }
 
-  .door-left .door-face-front img {
-    width: 100%;
-    height: 100%;
+  .door-left .door-face-front {
+    background: var(--maroon-dark);
+  }
+
+  .bridegroom-image {
+    position: absolute;
+    left: 0;
+    top: 29%;
+    width: 85%;
+    height: 71%;
     object-fit: cover;
     display: block;
   }
 
+  .ganesha-banner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
   .door-right .door-face-front {
-    background:
-      repeating-linear-gradient(45deg, rgba(217, 180, 92, 0.12) 0 10px, transparent 10px 20px),
-      linear-gradient(160deg, var(--maroon) 0%, var(--maroon-dark) 100%);
+    background: var(--maroon-dark);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -211,7 +245,7 @@
 
   .to-line {
     font-size: clamp(1rem, 2.4vw, 1.25rem);
-    color: var(--cream);
+    color: var(--gold-light);
     margin: 0;
   }
 
@@ -230,7 +264,7 @@
 
   .knob {
     position: absolute;
-    top: 50%;
+    top: 38%;
     left: 50%;
     transform: translate(-50%, -50%);
     min-width: 150px;
@@ -291,9 +325,9 @@
     .card {
       height: min(120vw, 560px);
     }
-    .section-ceremony {
+    .ceremony-text {
       gap: 4px;
-      padding: 8px 6px;
+      padding: 16% 8%;
     }
   }
 </style>
@@ -302,12 +336,15 @@
   <div class="stage">
     <div class="card" id="card">
       <div class="interior" id="interior">
-        <div class="section-ceremony" data-role="ceremony"></div>
+        <div class="section-ceremony" data-role="ceremony">
+          <div class="ceremony-text" id="ceremonyText"></div>
+        </div>
       </div>
 
       <div class="door door-left">
         <div class="door-face door-face-front">
-          <img src="images.jpeg" alt="Wedding couple illustration">
+          <img class="bridegroom-image" src="Gemini_Generated_Image_ujjx3xujjx3xujjx.png" alt="Bride and groom illustration">
+          <img class="ganesha-banner" src="ganesha_1.png" alt="Lord Ganesha emblem">
         </div>
         <div class="door-face door-face-back"></div>
       </div>
@@ -329,11 +366,11 @@
 
 <script>
   const card = document.getElementById('card');
-  const interior = document.getElementById('interior');
   const openBtn = document.getElementById('openBtn');
   const knobLabel = document.getElementById('knobLabel');
   const doorTitle = document.getElementById('doorTitle');
   const guestName = document.getElementById('guestName');
+  const ceremonyText = document.getElementById('ceremonyText');
 
   openBtn.addEventListener('click', () => {
     const isOpen = card.classList.toggle('open');
@@ -348,37 +385,37 @@
   const CONTENT = {
     english: {
       title: "Gummadi's Wedding Invitation",
-      groom: { label: 'Groom', name: 'Sai Dheeraj', short: 'Sai Dheeraj', parents: 'Son of Gummadi Venkata Sudhakar & Gummadi Padmaja' },
-      bride: { label: 'Bride', name: 'Lasya Harini', short: 'Lasya Harini', parents: 'Daughter of Gogineni Ramesh & Gogineni Hemalatha' },
-      invocation: 'We joyfully invite you to celebrate the wedding of',
-      date: 'Saturday, 24th January 2026',
-      time: 'Muhurtham: 10:30 – 11:00 AM',
-      venue: 'Sri Vasavi Kalyana Mandapam, Vijayawada, Andhra Pradesh'
+      invite: 'You are invited to the wedding of',
+      groom: { short: 'Sai Dheeraj', parents: 'Son of Gummadi Venkata Sudhakar & Gummadi Padmaja' },
+      bride: { short: 'Lasya Harini', parents: 'Daughter of Gogineni Ramesh & Gogineni Hemalatha' },
+      dateMonth: 'January', dateDay: '24', dateYear: '2026',
+      time: 'Muhurtham 10:30 – 11:00 AM',
+      venueLines: ['Sri Vasavi Kalyana Mandapam', 'Vijayawada, Andhra Pradesh']
     },
     telugu: {
       title: 'గుమ్మడి వారి పెళ్ళి ఆహ్వానం',
-      groom: { label: 'వరుడు', name: 'చి. సాయి ధీరజ్', short: 'సాయి ధీరజ్', parents: 'గుమ్మడి వెంకట సుధాకర్ - గుమ్మడి పద్మజ దంపతుల కుమారుడు' },
-      bride: { label: 'వధువు', name: 'చి.లా.సౌ. లాస్య హరిణి', short: 'లాస్య హరిణి', parents: 'గోగినేని రమేష్ - గోగినేని హేమలత దంపతుల కుమార్తె' },
-      invocation: 'శ్రీరస్తు శుభమస్తు అవిఘ్నమస్తు',
-      date: '24-01-2026, శనివారము',
-      time: 'ముహూర్తం: ఉ. 10:30 - 11:00 గం.',
-      venue: 'శ్రీ వాసవి కళ్యాణ మందిరం, విజయవాడ, ఆంధ్రప్రదేశ్'
+      invite: 'వివాహ శుభకార్యమునకు సాదర ఆహ్వానం',
+      groom: { short: 'సాయి ధీరజ్', parents: 'గుమ్మడి వెంకట సుధాకర్ - గుమ్మడి పద్మజ దంపతుల కుమారుడు' },
+      bride: { short: 'లాస్య హరిణి', parents: 'గోగినేని రమేష్ - గోగినేని హేమలత దంపతుల కుమార్తె' },
+      dateMonth: 'జనవరి', dateDay: '24', dateYear: '2026',
+      time: 'ముహూర్తం ఉ. 10:30 - 11:00 గం.',
+      venueLines: ['శ్రీ వాసవి కళ్యాణ మందిరం', 'విజయవాడ, ఆంధ్రప్రదేశ్']
     }
   };
 
-  function buildRoleSection(person) {
-    return `<p class="role-label">${person.label}</p>` +
-      `<p class="role-name">${person.name}</p>` +
+  function buildPersonBlock(person) {
+    return `<p class="couple-name">${person.short}</p>` +
       `<p class="role-parents">${person.parents}</p>`;
   }
 
   function buildCeremonySection(content) {
-    return `<p class="ceremony-invocation">${content.invocation}</p>` +
-      buildRoleSection(content.groom) +
-      buildRoleSection(content.bride) +
-      `<p class="ceremony-date">${content.date}</p>` +
+    return `<p class="invite-line">${content.invite}</p>` +
+      buildPersonBlock(content.groom) +
+      `<p class="amp-divider">&amp;</p>` +
+      buildPersonBlock(content.bride) +
+      `<div class="date-box"><span>${content.dateMonth}</span><span class="sep">|</span><span>${content.dateDay}</span><span class="sep">|</span><span>${content.dateYear}</span></div>` +
       `<p class="ceremony-time">${content.time}</p>` +
-      `<p class="ceremony-venue">${content.venue}</p>`;
+      content.venueLines.map(line => `<p class="ceremony-venue">${line}</p>`).join('');
   }
 
   function buildKnobLabel(content) {
@@ -392,7 +429,7 @@
 
     card.classList.add(`lang-${lang}`);
     doorTitle.textContent = content.title;
-    interior.querySelector('.section-ceremony').innerHTML = buildCeremonySection(content);
+    ceremonyText.innerHTML = buildCeremonySection(content);
     knobLabel.textContent = buildKnobLabel(content);
   }
 
