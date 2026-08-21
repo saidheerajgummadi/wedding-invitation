@@ -321,6 +321,39 @@
     margin: 0;
   }
 
+  .card.no-anim, .card.no-anim * { transition: none !important; }
+
+  .download-btn {
+    padding: 10px 22px;
+    border-radius: 999px;
+    border: 3px solid var(--maroon-dark);
+    background: radial-gradient(circle at 35% 30%, var(--gold-light), var(--gold) 70%);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5);
+    color: var(--maroon-dark);
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    cursor: pointer;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+
+  .download-btn:hover:not(:disabled) { filter: brightness(1.08); }
+
+  .download-btn:disabled {
+    cursor: not-allowed;
+    opacity: 0.55;
+  }
+
+  .status {
+    color: var(--gold-light);
+    font-size: 0.85rem;
+    letter-spacing: 0.02em;
+    margin: 0;
+    min-height: 1.2em;
+    text-align: center;
+  }
+
   @media (max-width: 480px) {
     .card {
       height: min(120vw, 560px);
@@ -362,6 +395,9 @@
     </div>
 
     <p class="hint">Tap the nameplate to open or close</p>
+
+    <button class="download-btn" id="downloadBtn">⬇ Download 3s HD video</button>
+    <p class="status" id="statusText"></p>
   </div>
 
 <script>
@@ -371,11 +407,22 @@
   const doorTitle = document.getElementById('doorTitle');
   const guestName = document.getElementById('guestName');
   const ceremonyText = document.getElementById('ceremonyText');
+  const downloadBtn = document.getElementById('downloadBtn');
+  const statusText = document.getElementById('statusText');
 
-  openBtn.addEventListener('click', () => {
-    const isOpen = card.classList.toggle('open');
+  function setCardOpen(isOpen) {
+    card.classList.toggle('open', isOpen);
     openBtn.classList.toggle('active', isOpen);
-  });
+  }
+
+  function resetCardClosedInstantly() {
+    card.classList.add('no-anim');
+    setCardOpen(false);
+    void card.offsetHeight;
+    card.classList.remove('no-anim');
+  }
+
+  openBtn.addEventListener('click', () => setCardOpen(!card.classList.contains('open')));
 
   function applyGuestNameFromUrl() {
     const requestedName = new URLSearchParams(window.location.search).get('name');
@@ -433,8 +480,77 @@
     knobLabel.textContent = buildKnobLabel(content);
   }
 
+  function pickSupportedMimeType() {
+    const candidates = ['video/webm;codecs=vp9', 'video/webm;codecs=vp8', 'video/webm'];
+    return candidates.find((type) => MediaRecorder.isTypeSupported(type)) || '';
+  }
+
+  function wait(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  }
+
+  function downloadBlob(blob, filename) {
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    URL.revokeObjectURL(url);
+  }
+
+  async function recordOpeningVideo() {
+    downloadBtn.disabled = true;
+    statusText.textContent = 'Choose "This tab" and click Share to start recording…';
+
+    let stream;
+    try {
+      stream = await navigator.mediaDevices.getDisplayMedia({
+        video: { displaySurface: 'browser', width: { ideal: 1280 }, height: { ideal: 720 }, frameRate: { ideal: 30 } },
+        audio: false,
+        preferCurrentTab: true
+      });
+    } catch {
+      statusText.textContent = 'Recording cancelled.';
+      downloadBtn.disabled = false;
+      return;
+    }
+
+    resetCardClosedInstantly();
+
+    const mimeType = pickSupportedMimeType();
+    const recorder = new MediaRecorder(stream, { mimeType, videoBitsPerSecond: 4_000_000 });
+    const chunks = [];
+    recorder.ondataavailable = (event) => { if (event.data.size) chunks.push(event.data); };
+    const stopped = new Promise((resolve) => { recorder.onstop = resolve; });
+
+    statusText.textContent = 'Recording…';
+    recorder.start();
+
+    await wait(1000);
+    setCardOpen(true);
+    await wait(2000);
+
+    recorder.stop();
+    stream.getTracks().forEach((track) => track.stop());
+    await stopped;
+
+    downloadBlob(new Blob(chunks, { type: mimeType }), 'wedding-card-opening.webm');
+    statusText.textContent = 'Downloaded!';
+    downloadBtn.disabled = false;
+  }
+
+  if (navigator.mediaDevices && navigator.mediaDevices.getDisplayMedia && window.MediaRecorder) {
+    downloadBtn.addEventListener('click', recordOpeningVideo);
+  } else {
+    downloadBtn.disabled = true;
+    statusText.textContent = 'Video download needs this page hosted over https:// (not available when opened as a local file).';
+  }
+
   applyGuestNameFromUrl();
   applyLanguageContent();
+  setTimeout(() => setCardOpen(true), 1000);
 </script>
 </body>
 </html>
